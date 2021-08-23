@@ -30,6 +30,7 @@ struct promise {
 	void return_void() {}
 };
 
+
 struct task {
 	using promise_type = promise<void>;
 	task() = default;
@@ -45,19 +46,12 @@ struct resume_new_thread : std::suspend_always {
 struct DelayAwaiter : std::suspend_always {
 	DelayAwaiter(chrono::milliseconds ms) : _ms(ms) {}
 
-	bool await_ready() const noexcept {
-		return false;
-	}
-
 	void await_suspend(std::coroutine_handle<> coro) {
 		thread t([coro](auto ms) {
 			std::this_thread::sleep_for(ms);
 			coro();
 			}, _ms);
 		t.detach();
-	}
-
-	void await_resume() noexcept {
 	}
 
 	chrono::milliseconds _ms;
