@@ -6,7 +6,6 @@
 #include <iostream>
 #include <experimental/generator>
 #include <conio.h>
-#include <assert.h>
 
 using namespace std::experimental;
 
