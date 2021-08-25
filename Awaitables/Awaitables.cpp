@@ -60,7 +60,7 @@ struct DelayAwaiter : std::suspend_always {
 struct Delay {
 	Delay(chrono::milliseconds ms) : _ms(ms) {}
 
-	DelayAwaiter operator co_await() {
+	auto operator co_await() {
 		return DelayAwaiter(_ms);
 	}
 
