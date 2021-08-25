@@ -81,12 +81,11 @@ task TestDelay() {
 	co_await resume_new_thread();
 	cout << "TID: " << this_thread::get_id() << endl;
 
-	co_await Delay(2s);
-	cout << "After 2 sec delay... " << GetTime() << endl;
-	co_await Delay(3s);
-	cout << "After 3 sec delay... " << GetTime() << endl;
-	co_await Delay(2s);
-	cout << "After 2 sec delay... " << GetTime() << endl;
+	for (int i = 0; i < 10; i++) {
+		co_await Delay(1s);
+		cout << i << endl;
+	}
+
 }
 
 int main() {
